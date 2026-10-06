@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+
+const galleryData = [
+  {
+    id: 1,
+    title: "Floral Pathway",
+    category: "Pre-Wedding Shoots",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=60",
+  },
+  {
+    id: 2,
+    title: "Couple Mandap",
+    category: "Wedding Day Highlights",
+    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=60",
+  },
+  {
+    id: 3,
+    title: "Resort Aerial View",
+    category: "Drone Shots",
+    image: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=800&auto=format&fit=crop&q=60",
+  },
+  {
+    id: 4,
+    title: "Evening Lawn Reception",
+    category: "Cinematic Shots",
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop&q=60",
+  },
+  {
+    id: 5,
+    title: "Stage Setup",
+    category: "Wedding Day Highlights",
+    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&auto=format&fit=crop&q=60",
+  },
+];
+
+const categories = [
+  "All",
+  "Drone Shots",
+  "Cinematic Shots",
+  "Pre-Wedding Shoots",
+  "Wedding Day Highlights",
+];
+
+export default function WeddingGallery() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredImages =
+    activeCategory === "All"
+      ? galleryData
+      : galleryData.filter((item) => item.category === activeCategory);
+
+  return (
+    <section className="py-12 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#173828] mb-8">
+          Our Wedding Gallery
+        </h2>
+
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-1.5 text-xs md:text-sm font-medium rounded border transition-colors duration-200 ${
+                activeCategory === cat
+                  ? "bg-[#173828] text-white border-[#173828]"
+                  : "bg-white text-sky-700 border-sky-600 hover:bg-sky-50"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Horizontal Scroll Gallery */}
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-400 scrollbar-track-neutral-100 snap-x">
+          {filteredImages.map((item) => (
+            <div
+              key={item.id}
+              className="flex-shrink-0 w-64 md:w-80 h-72 md:h-80 rounded-2xl overflow-hidden shadow-sm snap-start"
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

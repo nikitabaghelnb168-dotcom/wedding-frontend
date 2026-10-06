@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  background-color: #FAF8F5;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #2C2A29;
+  background-color: #FAF8F5;
+}
+
+.font-serif {
+  font-family: 'Marcellus', serif;
+}
+
+/* Custom CSS Calendar & Map Utilities */
+.invert-calendar::-webkit-calendar-picker-indicator {
+  filter: invert(0.2);
+}
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 4s ease-in-out infinite;
+}
+@keyframes marquee-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Base style validation if Tailwind compilation flags are weak */
+.mask-gradient {
+  mask-image: linear-gradient(to right, transparent, white 8%, white 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, white 8%, white 92%, transparent);
+}
